@@ -5,7 +5,6 @@ from .serializers import *
 
 # Create your views here.
 
-
 @api_view(['GET'])
 def apiOverview(request):
 	api_urls = {
@@ -18,10 +17,9 @@ def apiOverview(request):
 	return Response(api_urls)
 
 
-
 @api_view(['GET'])
 def taskList(request):
-	tasks = Task.objects.all()
+	tasks = Task.objects.all().order_by('-id')
 	serializer = TaskSerializer(tasks, many=True)
 	return Response(serializer.data)
 
